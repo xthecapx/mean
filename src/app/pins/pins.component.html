@@ -1,0 +1,17 @@
+<mat-accordion class="pins">
+  <mat-expansion-panel *ngFor="let pin of pins; let index = index" [expanded]="step === index" (opened)="setStep(index)" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title> {{ pin.title }} </mat-panel-title>
+      <mat-panel-description>
+        {{ pin.group }}
+        <mat-icon>account_circle</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-list>
+      <mat-list-item>
+        <mat-checkbox [(ngModel)]="pin.completed">{{ pin.title }}</mat-checkbox> <button mat-button>View</button>
+      </mat-list-item>
+    </mat-list>
+    <mat-action-row> <button mat-button color="primary" (click)="nextStep()">Next</button> </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

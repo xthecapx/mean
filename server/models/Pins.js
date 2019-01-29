@@ -6,6 +6,8 @@ var PinsSchema = new mongoose.Schema({
   author: String,
   description: String,
   group: String,
+  url: String,
+  completed: Boolean,
   tags: [
     {
       type: String
