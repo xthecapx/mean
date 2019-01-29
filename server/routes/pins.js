@@ -1,4 +1,6 @@
 var express = require('express');
+var cheerio = require('cheerio');
+var request = require('request');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Book = require('../models/Pins.js');
@@ -41,6 +43,27 @@ router.delete('/:id', function(req, res, next) {
     if (err) return next(err);
     res.json(post);
   });
+});
+
+/* GET PAGE INFO */
+// curl -i -X POST -H "Content-Type: application/json" -d '{ "url": "https://www.youtube.com/watch?v=WaH8BR4peGs" }' localhost:3000/api/page-info
+router.post('/info', function(req, res, next) {
+  if (req.body.url) {
+    request({ url: req.body.url }, function(error, response, body) {
+      if (error) return next(error);
+
+      if (!error && response.statusCode == 200) {
+        const $ = cheerio.load(body);
+        const webpageTitle = $('title').text();
+        const metaDescription = $('meta[name=description]').attr('content');
+        const webpage = {
+          title: webpageTitle,
+          metaDescription: metaDescription
+        };
+        res.json(webpage);
+      }
+    });
+  }
 });
 
 module.exports = router;
