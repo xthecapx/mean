@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng build && node ./server/bin/www",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -20,8 +20,14 @@
     "@angular/platform-browser": "~7.0.0",
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
+    "body-parser": "^1.18.3",
     "core-js": "^2.5.4",
+    "express": "^4.16.4",
+    "http-errors": "^1.7.1",
+    "mongoose": "^5.4.7",
+    "morgan": "^1.9.1",
     "rxjs": "~6.3.3",
+    "serve-favicon": "^2.5.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
