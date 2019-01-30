@@ -3,35 +3,72 @@ var cheerio = require('cheerio');
 var request = require('request');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Book = require('../models/Pins.js');
+var Pins = require('../models/Pins.js');
+var requestPromise = require('request-promise-native');
 
 /* GET ALL PINS */
 router.get('/', function(req, res, next) {
-  Book.find(function(err, products) {
+  Pins.find(function(err, pins) {
     if (err) return next(err);
-    res.json(products);
+    res.json(pins);
   });
 });
 
 /* GET SINGLE PIN BY ID */
 router.get('/:id', function(req, res, next) {
-  Book.findById(req.params.id, function(err, post) {
+  Pins.findById(req.params.id, function(err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
+// ["http", "http"]
+function getMetadataFromAssets(assets) {
+  return Promise.all(
+    assets.map(async asset => {
+      return await requestPromise({ url: asset.url });
+    })
+  );
+}
+
 /* SAVE PIN */
-router.post('/', function(req, res, next) {
-  Book.create(req.body, function(err, post) {
-    if (err) return next(err);
-    res.json(post);
-  });
+router.post('/', async function(req, res, next) {
+  const _pins = {
+    title: req.body.title,
+    author: req.body.author,
+    description: req.body.description,
+    percentage: 0,
+    tags: [],
+    assets: []
+  };
+
+  getMetadataFromAssets(req.body.assets)
+    .then(htmls => {
+      htmls.forEach(html => {
+        const $ = cheerio.load(html);
+        const webpageTitle = $('title').text();
+        const metaDescription = $('meta[name=description]').attr('content');
+
+        _pins.assets.push({
+          title: webpageTitle,
+          description: metaDescription,
+          readed: false
+        });
+      });
+
+      Pins.create(_pins, function(err, post) {
+        if (err) return next(err);
+        res.json(post);
+      });
+    })
+    .catch(error => {
+      next(error);
+    });
 });
 
 /* UPDATE PIN */
 router.put('/:id', function(req, res, next) {
-  Book.findByIdAndUpdate(req.params.id, req.body, function(err, post) {
+  Pins.findByIdAndUpdate(req.params.id, req.body, function(err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -39,7 +76,7 @@ router.put('/:id', function(req, res, next) {
 
 /* DELETE PIN */
 router.delete('/:id', function(req, res, next) {
-  Book.findByIdAndRemove(req.params.id, req.body, function(err, post) {
+  Pins.findByIdAndRemove(req.params.id, req.body, function(err, post) {
     if (err) return next(err);
     res.json(post);
   });

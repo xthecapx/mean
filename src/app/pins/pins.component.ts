@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-pins',
@@ -8,7 +9,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class PinsComponent {
   public step = 0;
-  public pins = [
+  /* public pins = [
     {
       title: 'Learning path 1',
       author: 'Cristian Marquez',
@@ -102,9 +103,16 @@ export class PinsComponent {
       ],
       assetsOptions: ['Video 1', 'Video 2', 'Video 3']
     }
-  ];
+  ]; */
+  public pins = [];
 
-  ngOnInit() {}
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.http.get('/api').subscribe((pins: Object[]) => {
+      this.pins = pins;
+    });
+  }
 
   public setStep(index: number) {
     this.step = index;
