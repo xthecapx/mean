@@ -23,11 +23,14 @@ import {
   MatStepperModule
 } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { PinsComponent } from './pins/pins.component';
-import { LayoutComponent } from './layout/layout.component';
-import { MenuComponent } from './menu/menu.component';
-import { ActionsComponent } from './actions/actions.component';
-import { FormComponent } from './form/form.component';
+import { PinsComponent } from './components/pins/pins.component';
+import { LayoutComponent } from './components/layout/layout.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { ActionsComponent } from './components/actions/actions.component';
+import { FormComponent } from './components/form/form.component';
+import { ApiService } from './services/api.service';
+import { RepositoryService } from './services/repository.service';
+import { NavigationService } from './services/navigation.service';
 
 @NgModule({
   declarations: [AppComponent, PinsComponent, LayoutComponent, MenuComponent, ActionsComponent, FormComponent],
@@ -55,7 +58,7 @@ import { FormComponent } from './form/form.component';
     HttpClientModule
   ],
   entryComponents: [ActionsComponent],
-  providers: [],
+  providers: [ApiService, RepositoryService, NavigationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { RepositoryService } from 'src/app/services/repository.service';
 
 @Component({
   selector: 'app-form',
@@ -14,7 +14,7 @@ export class FormComponent implements OnInit {
   secondFormGroup: FormGroup;
   assets: FormArray;
 
-  constructor(private _formBuilder: FormBuilder, private http: HttpClient) {}
+  constructor(private _formBuilder: FormBuilder, private repository: RepositoryService) {}
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -53,10 +53,8 @@ export class FormComponent implements OnInit {
       assets: [{ url: asset }, ...asset2]
     };
 
-    this.http.post('/api', model).subscribe(pin => {
-      console.log(pin);
+    this.repository.savePins(model).subscribe(response => {
+      console.log(response);
     });
-
-    console.log(model);
   }
 }

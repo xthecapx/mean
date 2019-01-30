@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LayoutComponent } from './layout/layout.component';
-import { PinsComponent } from './pins/pins.component';
-import { FormComponent } from './form/form.component';
+import { LayoutComponent } from './components/layout/layout.component';
+import { PinsComponent } from './components/pins/pins.component';
+import { FormComponent } from './components/form/form.component';
 
 const routes: Routes = [
   {
