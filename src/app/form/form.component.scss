@@ -1,0 +1,14 @@
+.form {
+  .mat-form-field {
+    display: block;
+    max-width: 300px;
+
+    &.extra {
+      max-width: 400px;
+    }
+  }
+
+  .button-right {
+    float: right;
+  }
+}

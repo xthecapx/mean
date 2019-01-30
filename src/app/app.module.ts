@@ -18,15 +18,19 @@ import {
   MatCardModule,
   MatNativeDateModule,
   MatExpansionModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatBottomSheetModule,
+  MatStepperModule
 } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PinsComponent } from './pins/pins.component';
 import { LayoutComponent } from './layout/layout.component';
 import { MenuComponent } from './menu/menu.component';
+import { ActionsComponent } from './actions/actions.component';
+import { FormComponent } from './form/form.component';
 
 @NgModule({
-  declarations: [AppComponent, PinsComponent, LayoutComponent, MenuComponent],
+  declarations: [AppComponent, PinsComponent, LayoutComponent, MenuComponent, ActionsComponent, FormComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -46,8 +50,11 @@ import { MenuComponent } from './menu/menu.component';
     MatExpansionModule,
     MatCheckboxModule,
     ReactiveFormsModule,
+    MatBottomSheetModule,
+    MatStepperModule,
     HttpClientModule
   ],
+  entryComponents: [ActionsComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
