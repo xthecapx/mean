@@ -6,12 +6,15 @@
         {{ pin.group }}
         <mat-icon>account_circle</mat-icon>
       </mat-panel-description>
+      <div class="percentage-element" [ngStyle]="{ 'width.%': pin.percentage }"></div>
     </mat-expansion-panel-header>
     <mat-list>
-      <mat-list-item>
-        <mat-checkbox [(ngModel)]="pin.completed">{{ pin.title }}</mat-checkbox> <button mat-button>View</button>
+      <mat-list-item *ngFor="let asset of pin.assets">
+        <button mat-mini-fab color="accent">Go</button>
+        <mat-checkbox [(ngModel)]="asset.readed" labelPosition="before">{{ asset.title }}</mat-checkbox>
       </mat-list-item>
     </mat-list>
+
     <mat-action-row> <button mat-button color="primary" (click)="nextStep()">Next</button> </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>

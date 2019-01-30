@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavigationComponent } from './navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import {
   MatToolbarModule,
@@ -21,12 +20,13 @@ import {
   MatExpansionModule,
   MatCheckboxModule
 } from '@angular/material';
-import { NewPinComponent } from './new-pin/new-pin.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PinsComponent } from './pins/pins.component';
+import { LayoutComponent } from './layout/layout.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
-  declarations: [AppComponent, NavigationComponent, NewPinComponent, PinsComponent],
+  declarations: [AppComponent, PinsComponent, LayoutComponent, MenuComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

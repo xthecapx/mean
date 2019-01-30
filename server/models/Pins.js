@@ -5,14 +5,13 @@ var PinsSchema = new mongoose.Schema({
   title: String,
   author: String,
   description: String,
-  group: String,
-  url: String,
-  completed: Boolean,
+  percentage: Number,
   tags: [
     {
       type: String
     }
   ],
+  assets: [{ url: String, title: String, description: String, readed: Boolean }],
   updated_date: { type: Date, default: Date.now }
 });
 

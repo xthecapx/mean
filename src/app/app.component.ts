@@ -12,8 +12,8 @@ export class AppComponent {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.http.post('/api/info', { url: 'https://www.youtube.com/watch?v=WaH8BR4peGs' }).subscribe(res => {
+    /* this.http.post('/api/info', { url: 'https://www.youtube.com/watch?v=WaH8BR4peGs' }).subscribe(res => {
       console.log(res);
-    });
+    }); */
   }
 }

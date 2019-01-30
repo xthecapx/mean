@@ -1,41 +1,110 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-pins',
   templateUrl: './pins.component.html',
-  styleUrls: ['./pins.component.scss']
+  styleUrls: ['./pins.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PinsComponent {
   public step = 0;
   public pins = [
     {
-      title: 'Title 1',
+      title: 'Learning path 1',
       author: 'Cristian Marquez',
       description: 'Description',
       group: 'Javascript',
+      percentage: 0,
       completed: true,
       url: 'https://www.youtube.com/watch?v=mC2LRZ23AFU',
-      tags: ['Javascript', 'Code', 'Video']
+      tags: ['Javascript', 'Code', 'Video'],
+      assets: [
+        {
+          url: 'https://www.youtube.com/watch?v=mC2LRZ23AFU',
+          title: 'Video Title',
+          description: 'Video description',
+          readed: false
+        },
+        {
+          url: 'https://www.youtube.com/watch?v=mC2LRZ23AFU',
+          title: 'Video Title',
+          description: 'Video description',
+          readed: false
+        },
+        {
+          url: 'https://www.youtube.com/watch?v=mC2LRZ23AFU',
+          title: 'Video Title',
+          description: 'Video description',
+          readed: false
+        }
+      ],
+      assetsOptions: ['Video 1', 'Video 2', 'Video 3']
     },
     {
-      title: 'Title 2',
+      title: 'Learning path 2',
       author: 'Cristian Marquez',
-      description: 'Description 2',
+      description: 'Description',
       group: 'Javascript',
-      completed: false,
+      percentage: 50,
+      completed: true,
       url: 'https://www.youtube.com/watch?v=mC2LRZ23AFU',
-      tags: ['Javascript', 'Code', 'Video']
+      tags: ['Javascript', 'Code', 'Video'],
+      assets: [
+        {
+          url: 'https://www.youtube.com/watch?v=mC2LRZ23AFU',
+          title: 'Video Title',
+          description: 'Video description',
+          readed: true
+        },
+        {
+          url: 'https://www.youtube.com/watch?v=mC2LRZ23AFU',
+          title: 'Video Title',
+          description: 'Video description',
+          readed: false
+        },
+        {
+          url: 'https://www.youtube.com/watch?v=mC2LRZ23AFU',
+          title: 'Video Title',
+          description: 'Video description',
+          readed: false
+        }
+      ],
+      assetsOptions: ['Video 1', 'Video 2', 'Video 3']
     },
     {
-      title: 'Title 3',
+      title: 'Learning path 3',
       author: 'Cristian Marquez',
-      description: 'Description 3',
+      description: 'Description',
       group: 'Javascript',
-      completed: false,
+      percentage: 100,
+      completed: true,
       url: 'https://www.youtube.com/watch?v=mC2LRZ23AFU',
-      tags: ['Javascript', 'Code', 'Video']
+      tags: ['Javascript', 'Code', 'Video'],
+      assets: [
+        {
+          url: 'https://www.youtube.com/watch?v=mC2LRZ23AFU',
+          title: 'Video Title',
+          description: 'Video description',
+          readed: true
+        },
+        {
+          url: 'https://www.youtube.com/watch?v=mC2LRZ23AFU',
+          title: 'Video Title',
+          description: 'Video description',
+          readed: true
+        },
+        {
+          url: 'https://www.youtube.com/watch?v=mC2LRZ23AFU',
+          title: 'Video Title',
+          description: 'Video description',
+          readed: true
+        }
+      ],
+      assetsOptions: ['Video 1', 'Video 2', 'Video 3']
     }
   ];
+
+  ngOnInit() {}
 
   public setStep(index: number) {
     this.step = index;
