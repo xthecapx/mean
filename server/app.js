@@ -10,6 +10,7 @@ var app = express();
 
 var mongoose = require('mongoose');
 mongoose
+  .set('useFindAndModify', false)
   .connect(
     'mongodb://localhost/pins',
     { promiseLibrary: require('bluebird'), useNewUrlParser: true }

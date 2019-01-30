@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatBottomSheet } from '@angular/material';
 import { ActionsComponent } from '../actions/actions.component';
-import { ActivatedRoute, Router, NavigationStart } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 @Component({

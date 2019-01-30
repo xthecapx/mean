@@ -14,7 +14,7 @@ export class RepositoryService {
     if (environment.mocks) {
       return of(PINS);
     } else {
-      return this.api.get('/pins');
+      return this.api.get('');
     }
   }
 
@@ -23,6 +23,14 @@ export class RepositoryService {
       return of(body);
     } else {
       return this.api.post('', body);
+    }
+  }
+
+  public updatePin(id, body) {
+    if (environment.mocks) {
+      return of(body);
+    } else {
+      return this.api.put('/' + id, body);
     }
   }
 }

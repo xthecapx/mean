@@ -20,7 +20,8 @@ import {
   MatExpansionModule,
   MatCheckboxModule,
   MatBottomSheetModule,
-  MatStepperModule
+  MatStepperModule,
+  MatSnackBarModule
 } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PinsComponent } from './components/pins/pins.component';
@@ -31,6 +32,7 @@ import { FormComponent } from './components/form/form.component';
 import { ApiService } from './services/api.service';
 import { RepositoryService } from './services/repository.service';
 import { NavigationService } from './services/navigation.service';
+import { PinsService } from './components/pins/pins.service';
 
 @NgModule({
   declarations: [AppComponent, PinsComponent, LayoutComponent, MenuComponent, ActionsComponent, FormComponent],
@@ -55,10 +57,11 @@ import { NavigationService } from './services/navigation.service';
     ReactiveFormsModule,
     MatBottomSheetModule,
     MatStepperModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
   ],
   entryComponents: [ActionsComponent],
-  providers: [ApiService, RepositoryService, NavigationService],
+  providers: [ApiService, RepositoryService, NavigationService, PinsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiEndpoint: '/api',
-  mocks: true
+  mocks: false
 };
 
 /*

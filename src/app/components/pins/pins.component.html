@@ -15,6 +15,10 @@
       </mat-list-item>
     </mat-list>
 
-    <mat-action-row> <button mat-button color="primary" (click)="nextStep()">Next</button> </mat-action-row>
+    <mat-action-row>
+      <button mat-button color="primary" (click)="updateProgress(index)">Update Progress</button>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+      <button mat-button color="primary" (click)="prevStep()">Prev</button>
+    </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>

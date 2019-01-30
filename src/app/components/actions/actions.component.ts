@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatBottomSheetRef } from '@angular/material';
+import { PinsService } from '../pins/pins.service';
 
 @Component({
   selector: 'app-actions',
@@ -7,10 +8,11 @@ import { MatBottomSheetRef } from '@angular/material';
   styleUrls: ['./actions.component.scss']
 })
 export class ActionsComponent {
-  constructor(private bottomSheetRef: MatBottomSheetRef<ActionsComponent>) {}
+  constructor(private bottomSheetRef: MatBottomSheetRef<ActionsComponent>, private pinsService: PinsService) {}
 
-  public openLink(event: MouseEvent): void {
-    this.bottomSheetRef.dismiss();
+  public openLink(event: MouseEvent, action: string): void {
     event.preventDefault();
+    this.bottomSheetRef.dismiss();
+    this.pinsService.resolveActionObserver(action);
   }
 }

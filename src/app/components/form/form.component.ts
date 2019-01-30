@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { RepositoryService } from 'src/app/services/repository.service';
+import { NavigationService } from 'src/app/services/navigation.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-form',
@@ -14,7 +16,12 @@ export class FormComponent implements OnInit {
   secondFormGroup: FormGroup;
   assets: FormArray;
 
-  constructor(private _formBuilder: FormBuilder, private repository: RepositoryService) {}
+  constructor(
+    private _formBuilder: FormBuilder,
+    private repository: RepositoryService,
+    private navigate: NavigationService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -54,7 +61,14 @@ export class FormComponent implements OnInit {
     };
 
     this.repository.savePins(model).subscribe(response => {
-      console.log(response);
+      this.snackBar
+        .open('Your pin is saved, Redirecting ...', 'Cool!', {
+          duration: 2000
+        })
+        .afterDismissed()
+        .subscribe(() => {
+          this.navigate.goToPins();
+        });
     });
   }
 }
