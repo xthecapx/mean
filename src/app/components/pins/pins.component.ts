@@ -64,11 +64,20 @@ export class PinsComponent {
   public updateProgress(index) {
     const pin = this.pins[index];
 
-    this.repository.updatePin(pin._id, pin).subscribe(pin => {
-      this.snackBar.open('Progress updated!', 'OK', {
-        duration: 2000
+    this.repository
+      .updatePin(pin._id, {
+        title: pin.title,
+        author: pin.author,
+        description: pin.description,
+        percentage: pin.percentage,
+        tags: pin.tags,
+        assets: pin.assets
+      })
+      .subscribe(pin => {
+        this.snackBar.open('Progress updated!', 'OK', {
+          duration: 2000
+        });
       });
-    });
   }
 
   public openUrl(URL: string): void {
@@ -87,6 +96,12 @@ export class PinsComponent {
       const percentage = ((active.length * 100) / total).toFixed(2);
 
       this.pins[index].percentage = percentage;
+      this.pins[index].assets = this.pins[index].assets.map(asset => {
+        return {
+          ...asset,
+          readed: values[asset._id]
+        };
+      });
     });
   }
 }

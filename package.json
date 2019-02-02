@@ -34,6 +34,7 @@
     "request-promise-native": "^1.0.5",
     "rxjs": "~6.3.3",
     "serve-favicon": "^2.5.0",
+    "url-parse": "^1.4.4",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

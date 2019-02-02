@@ -5,6 +5,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Pins = require('../models/Pins.js');
 var requestPromise = require('request-promise-native');
+var Url = require('url-parse');
 
 /* GET ALL PINS */
 router.get('/', function(req, res, next) {
@@ -26,7 +27,17 @@ router.get('/:id', function(req, res, next) {
 function getMetadataFromAssets(assets) {
   return Promise.all(
     assets.map(async asset => {
-      return await requestPromise({ url: asset.url });
+      const regex = /^.+\.(([pP][dD][fF])|([jJ][pP][gG]))$/gm;
+
+      if (regex.test(asset.url)) {
+        const url = Url(asset.url);
+        const title = url.hostname;
+        const description = url.pathname;
+
+        return Promise.resolve(`<title>PDF from: ${title} </title><meta name="description" content="${description}">`);
+      } else {
+        return await requestPromise({ url: asset.url });
+      }
     })
   );
 }
