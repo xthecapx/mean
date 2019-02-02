@@ -11,7 +11,7 @@
     <mat-list>
       <form [formGroup]="pin.formGroup">
         <mat-list-item *ngFor="let asset of pin.assets">
-          <button mat-mini-fab color="accent">Go</button>
+          <button (click)="openUrl(asset.url)" mat-mini-fab color="accent">Go</button>
           <mat-checkbox [formControlName]="asset._id" labelPosition="before">{{ asset.title }}</mat-checkbox>
         </mat-list-item>
       </form>

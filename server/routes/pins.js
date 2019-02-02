@@ -22,7 +22,7 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
-// ["http", "http"]
+/** Get URL information */
 function getMetadataFromAssets(assets) {
   return Promise.all(
     assets.map(async asset => {
@@ -44,7 +44,7 @@ router.post('/', async function(req, res, next) {
 
   getMetadataFromAssets(req.body.assets)
     .then(htmls => {
-      htmls.forEach(html => {
+      htmls.forEach((html, index) => {
         const $ = cheerio.load(html);
         const webpageTitle = $('title').text();
         const metaDescription = $('meta[name=description]').attr('content');
@@ -52,7 +52,8 @@ router.post('/', async function(req, res, next) {
         _pins.assets.push({
           title: webpageTitle,
           description: metaDescription,
-          readed: false
+          readed: false,
+          url: req.body.assets[index].url
         });
       });
 

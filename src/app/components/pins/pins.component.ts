@@ -71,6 +71,10 @@ export class PinsComponent {
     });
   }
 
+  public openUrl(URL: string): void {
+    window.open(URL, '_blank');
+  }
+
   private updatePercentage(index) {
     if (this.currentSubscription && !this.currentSubscription.closed) {
       this.currentSubscription.unsubscribe();
