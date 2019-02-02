@@ -4,6 +4,8 @@ import { MatSnackBar, MatBottomSheetRef, MatBottomSheet } from '@angular/materia
 import { PinsService } from './pins.service';
 import { ActionsComponent } from '../actions/actions.component';
 import { filter } from 'rxjs/operators';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-pins',
@@ -14,12 +16,29 @@ import { filter } from 'rxjs/operators';
 export class PinsComponent {
   public step = 0;
   public pins = [];
+  private currentSubscription: Subscription;
 
-  constructor(private repository: RepositoryService, private snackBar: MatSnackBar, private pinsService: PinsService) {}
+  constructor(
+    private repository: RepositoryService,
+    private snackBar: MatSnackBar,
+    private pinsService: PinsService,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.repository.getPins().subscribe(pins => {
-      this.pins = pins;
+      this.pins = pins.map(pin => {
+        const controls = {};
+
+        pin.assets.forEach(asset => {
+          controls[asset._id] = this.formBuilder.control(asset.readed);
+        });
+
+        return {
+          ...pin,
+          formGroup: this.formBuilder.group(controls)
+        };
+      });
     });
 
     this.pinsService.$actionObserver.pipe(filter(action => action === 'save')).subscribe(action => {
@@ -29,6 +48,7 @@ export class PinsComponent {
 
   public setStep(index: number) {
     this.step = index;
+    this.updatePercentage(index);
   }
 
   public nextStep() {
@@ -39,6 +59,8 @@ export class PinsComponent {
     this.step--;
   }
 
+  public setPercentage() {}
+
   public updateProgress(index) {
     const pin = this.pins[index];
 
@@ -46,6 +68,21 @@ export class PinsComponent {
       this.snackBar.open('Progress updated!', 'OK', {
         duration: 2000
       });
+    });
+  }
+
+  private updatePercentage(index) {
+    if (this.currentSubscription && !this.currentSubscription.closed) {
+      this.currentSubscription.unsubscribe();
+    }
+
+    this.currentSubscription = this.pins[index].formGroup.valueChanges.subscribe(values => {
+      const keys = Object.keys(values);
+      const total = keys.length;
+      const active = keys.map(key => values[key]).filter(value => value);
+      const percentage = ((active.length * 100) / total).toFixed(2);
+
+      this.pins[index].percentage = percentage;
     });
   }
 }

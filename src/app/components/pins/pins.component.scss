@@ -52,6 +52,7 @@
       left: 0;
       width: 50%; /* Specify the width.. */
       z-index: 0;
+      transition: width 0.5s;
     }
 
     .mat-expansion-panel-header-title,
