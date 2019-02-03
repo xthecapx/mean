@@ -2,7 +2,6 @@ var express = require('express');
 var cheerio = require('cheerio');
 var request = require('request');
 var router = express.Router();
-var mongoose = require('mongoose');
 var Pins = require('../models/Pins.js');
 var requestPromise = require('request-promise-native');
 var Url = require('url-parse');
