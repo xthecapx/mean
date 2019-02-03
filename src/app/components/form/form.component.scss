@@ -11,4 +11,19 @@
   .button-right {
     float: right;
   }
+
+  .assets-array {
+    .mat-form-field,
+    .mat-icon-button {
+      display: inline-block;
+    }
+
+    .mat-form-field {
+      width: 100%;
+    }
+
+    .mat-icon-button:hover {
+      color: #ff4081;
+    }
+  }
 }
