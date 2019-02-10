@@ -80,7 +80,7 @@
             "styles": ["./node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "src/styles.scss"],
             "scripts": [],
             "assets": ["src/favicon.ico", "src/assets"],
-            "codeCoverageExclude": ["src/test.ts", "src/polyfills.ts", "src/environments/*"],
+            "codeCoverageExclude": ["src/test.ts", "src/polyfills.ts", "src/environments/*", "src/app/services/mocks/*"],
             "codeCoverage": true
           }
         },

@@ -8,10 +8,12 @@ import { PINS } from './mocks/pins';
   providedIn: 'root'
 })
 export class RepositoryService {
+  private mockMode = environment.mocks;
+
   constructor(private api: ApiService) {}
 
   public getPins() {
-    if (environment.mocks) {
+    if (this.mockMode) {
       return of(PINS);
     } else {
       return this.api.get('');
@@ -19,7 +21,7 @@ export class RepositoryService {
   }
 
   public savePins(body) {
-    if (environment.mocks) {
+    if (this.mockMode) {
       return of(body);
     } else {
       return this.api.post('', body);
@@ -27,7 +29,7 @@ export class RepositoryService {
   }
 
   public updatePin(id, body) {
-    if (environment.mocks) {
+    if (this.mockMode) {
       return of(body);
     } else {
       return this.api.put('/' + id, body);
