@@ -4,17 +4,14 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 
-var apiRouter = require('./routes/pins');
+var apiRouter = require('./routes/pins').router;
 
 var app = express();
 
 var mongoose = require('mongoose');
 mongoose
   .set('useFindAndModify', false)
-  .connect(
-    'mongodb://localhost/pins',
-    { promiseLibrary: require('bluebird'), useNewUrlParser: true }
-  )
+  .connect('mongodb://localhost/pins', { promiseLibrary: require('bluebird'), useNewUrlParser: true })
   .then(() => console.log('connection successful'))
   .catch(err => console.error(err));
 

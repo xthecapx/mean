@@ -1,10 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RepositoryService } from 'src/app/services/repository.service';
-import { MatSnackBar, MatBottomSheetRef, MatBottomSheet } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { PinsService } from './pins.service';
-import { ActionsComponent } from '../actions/actions.component';
 import { filter } from 'rxjs/operators';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -58,8 +57,6 @@ export class PinsComponent {
   public prevStep() {
     this.step--;
   }
-
-  public setPercentage() {}
 
   public updateProgress(index) {
     const pin = this.pins[index];

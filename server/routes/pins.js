@@ -1,8 +1,6 @@
 var express = require('express');
 var cheerio = require('cheerio');
-var request = require('request');
 var router = express.Router();
-var mongoose = require('mongoose');
 var Pins = require('../models/Pins.js');
 var requestPromise = require('request-promise-native');
 var Url = require('url-parse');
@@ -36,14 +34,14 @@ function getMetadataFromAssets(assets) {
 
         return Promise.resolve(`<title>PDF from: ${title} </title><meta name="description" content="${description}">`);
       } else {
-        return await requestPromise({ url: asset.url });
+        return await requestPromise.get({ url: asset.url });
       }
     })
   );
 }
 
 /* SAVE PIN */
-router.post('/', async function(req, res, next) {
+router.post('/', function(req, res, next) {
   const _pins = {
     title: req.body.title,
     author: req.body.author,
@@ -94,25 +92,7 @@ router.delete('/:id', function(req, res, next) {
   });
 });
 
-/* GET PAGE INFO */
-// curl -i -X POST -H "Content-Type: application/json" -d '{ "url": "https://www.youtube.com/watch?v=WaH8BR4peGs" }' localhost:3000/api/page-info
-router.post('/info', function(req, res, next) {
-  if (req.body.url) {
-    request({ url: req.body.url }, function(error, response, body) {
-      if (error) return next(error);
-
-      if (!error && response.statusCode == 200) {
-        const $ = cheerio.load(body);
-        const webpageTitle = $('title').text();
-        const metaDescription = $('meta[name=description]').attr('content');
-        const webpage = {
-          title: webpageTitle,
-          metaDescription: metaDescription
-        };
-        res.json(webpage);
-      }
-    });
-  }
-});
-
-module.exports = router;
+module.exports = {
+  router,
+  getMetadataFromAssets
+};
