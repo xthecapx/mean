@@ -47,6 +47,7 @@
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "axios": "^0.18.0",
     "codelyzer": "~4.5.0",
     "jasmine": "^3.3.1",
     "jasmine-console-reporter": "^3.1.0",
