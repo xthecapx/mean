@@ -7,6 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "test:server": "./node_modules/jasmine/bin/jasmine.js",
+    "test:server:coverage": "node spec/specs.js",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -31,6 +32,7 @@
     "http-errors": "^1.7.1",
     "mongoose": "^5.4.7",
     "morgan": "^1.9.1",
+    "nyc": "^13.3.0",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5",
     "rxjs": "~6.3.3",
@@ -48,6 +50,7 @@
     "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
     "jasmine": "^3.3.1",
+    "jasmine-console-reporter": "^3.1.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~3.0.0",
