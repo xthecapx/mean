@@ -29,7 +29,7 @@ describe('Testing Router', () => {
     // GET 200
     it('200 and find pin', done => {
       const data = [{ id: 1 }];
-      spyOn(Pins, 'find').and.callFake(callBack => {
+      spyOn(Pins, 'find').and.callFake(id, param2, callBack => {
         callBack(false, data);
       });
 
@@ -83,6 +83,19 @@ describe('Testing Router', () => {
       );
 
       const assets = [{ url: 'http://platzi.com' }];
+
+      axios.post('http://localhost:3000/api', { title: 'title', author: 'author', description: 'description', assets }).then(res => {
+        expect(res.status).toBe(200);
+        done();
+      });
+    });
+
+    it('200 PDF', done => {
+      spyOn(Pins, 'create').and.callFake((pins, callBack) => {
+        callBack(false, {});
+      });
+
+      const assets = [{ url: 'http://platzi.pdf' }];
 
       axios.post('http://localhost:3000/api', { title: 'title', author: 'author', description: 'description', assets }).then(res => {
         expect(res.status).toBe(200);
