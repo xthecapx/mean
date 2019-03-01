@@ -34,4 +34,13 @@ fdescribe('MenuComponent', () => {
 
     component.clicked.next(val);
   });
+
+  it('Testing click', () => {
+    let button = fixture.debugElement.query(By.css('button'));
+    console.log(component.counter);
+    expect(component.counter).toBe(0);
+    button.triggerEventHandler('click', null);
+    console.log(component.counter);
+    expect(component.counter).toBe(1);
+  });
 });
