@@ -54,4 +54,23 @@ fdescribe('FormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('When component is initilizated', () => {
+    it('Should create the forms', () => {
+      expect(Object.keys(component.firstFormGroup.controls)).toEqual(['title', 'author', 'description']);
+      expect(Object.keys(component.secondFormGroup.controls)).toEqual(['firstAsset', 'assets']);
+    });
+  });
+
+  describe('When addAsset is executed', () => {
+    it('Should add new group', () => {
+      const assets = <FormArray>component.secondFormGroup.get('assets');
+
+      component.addAsset();
+      component.addAsset();
+
+      console.log(Object.keys(assets.controls));
+      expect(Object.keys(assets.controls)).toEqual(['0', '1']);
+    });
+  });
 });
