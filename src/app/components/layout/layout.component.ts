@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatBottomSheet } from '@angular/material';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ActionsComponent } from '../actions/actions.component';
 import { Router, NavigationStart } from '@angular/router';
 import { filter } from 'rxjs/operators';

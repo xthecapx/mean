@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RepositoryService } from 'src/app/services/repository.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PinsService } from './pins.service';
 import { filter } from 'rxjs/operators';
 import { FormBuilder } from '@angular/forms';
